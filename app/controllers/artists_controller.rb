@@ -9,7 +9,24 @@ class ArtistsController < ApplicationController
   end
 
   def show
-    respond_with(@artist)
+  respond_to do |format|
+    format.js do 
+      if @artist.image_url
+        render js: "window.location = '#{artist_path(@artist)}'"
+      else
+        url = URI.parse('https://randomuser.me/api/')
+        req = Net::HTTP::Get.new(url.to_s)
+        res = Net::HTTP.start(url.host, url.port, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) {|http|
+                 http.request(req)
+              }.body
+        json = JSON.parse(res)
+        image_url = json["results"].first["user"]["picture"]["large"]
+        @artist.update(image_url: image_url)
+        render js: "window.location = '#{artist_path(@artist)}'"
+      end
+    end
+    format.html
+   end
   end
 
   def new
