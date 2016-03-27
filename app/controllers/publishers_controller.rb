@@ -5,7 +5,10 @@ class PublishersController < ApplicationController
 
   def index
     @publishers = Publisher.all
-    respond_with(@publishers)
+    respond_to do |format|
+       format.json
+       format.html
+    end 
   end
 
   def show
