@@ -41,9 +41,7 @@ class SongsControllerTest < ActionController::TestCase
 
   test "should destroy song" do
     assert_difference('Song.count', -1) do
-      delete :destroy, id: @song
+      xhr :delete, :destroy, id: @song
     end
-
-    assert_redirected_to songs_path
   end
 end
