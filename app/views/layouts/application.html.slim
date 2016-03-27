@@ -50,7 +50,8 @@ html lang="en"
           .col-md-2
             ul
               li LATEST
-              li ~
+              -Album.recent.each do |album|
+                li= link_to album.name, album
           .col-md-2
             ul
               li OUR TEAM
