@@ -35,6 +35,7 @@ class SongsController < ApplicationController
     @song.destroy
     respond_to do |format|
        format.js {}
+       format.html{ redirect_to songs_url, notice: 'Song was successfully destroyed.' }
     end
   end
 

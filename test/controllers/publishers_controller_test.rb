@@ -17,11 +17,9 @@ class PublishersControllerTest < ActionController::TestCase
   end
 
   test "should create publisher" do
-    assert_difference('Publisher.count') do
+    assert_no_difference('Publisher.count') do
       post :create, publisher: { address: @publisher.address, city: @publisher.city, name: @publisher.name, phone: @publisher.phone, state: @publisher.state, url: @publisher.url, zip: @publisher.zip }
     end
-
-    assert_redirected_to publisher_path(assigns(:publisher))
   end
 
   test "should show publisher" do
